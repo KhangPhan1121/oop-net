@@ -10,22 +10,45 @@ namespace netdemo
 {
     class CanBo
     {
-        public string hoten { get; set; }
-        public int tuoi { get; set; }
-        public string gioitinh { get; set;}
-        public string diachi { get; set; }
+        public string HoTen { get; set; }
+        public int Tuoi { get; set; }
+        public string GioiTinh { get; set;}
+        public string DiaChi { get; set; }
+
+        public CanBo(string hoTen, int tuoi, string gioiTinh, string diaChi)
+        {
+            HoTen = hoTen;
+            Tuoi = tuoi;
+            GioiTinh = gioiTinh;
+            DiaChi = diaChi;
+        }
     }
     class CongNhan : CanBo
     {
         public int Bac { get; set; }
+
+        public CongNhan(string hoTen, int tuoi, string gioiTinh, string diaChi, int bac) : base(hoTen, tuoi, gioiTinh, diaChi)
+        {
+            Bac = bac;
+        }
     }
     class KySu : CanBo
     {
-        public string nganhdaotao { get; set; }
+        public string NganhDaoTao { get; set; }
+
+        public KySu(string hoTen, int tuoi, string gioiTinh, string diaChi, string nganhDaoTao) : base(hoTen, tuoi, gioiTinh, diaChi)
+        {
+            NganhDaoTao = nganhDaoTao;
+        }
     }
     class NhanVien : CanBo
     {
-        public string congviec { get; set; }
+        public string CongViec { get; set; }
+
+        public NhanVien(string hoTen, int tuoi, string gioiTinh, string diaChi, string congViec) : base(hoTen, tuoi, gioiTinh, diaChi)
+        {
+            CongViec = congViec;
+        }
     }
     class QLCB
     {
@@ -36,13 +59,19 @@ namespace netdemo
         }
         public List<CanBo> TimKiemTheoHoTen(string hoTen)
         {
-            List<CanBo> ketQuaTimKiem = danhsachCanBo.FindAll(canBo => canBo.hoten.Equals(hoTen, StringComparison.OrdinalIgnoreCase));
-            return ketQuaTimKiem;
+            return danhsachCanBo.Where(canBo => canBo.HoTen.ToLower().Contains(hoTen.ToLower())).ToList();
         }    
         public void HienThiDanhSachCanBo()
         {
             Console.WriteLine("Danh sách cán bộ: ");
-            
+            foreach (var canBo in danhsachCanBo)
+            {
+                if (canBo is CongNhan)
+                {
+                    var CongNhan = canBo as CongNhan;
+                    Console.WriteLine();
+                }
+            }
         }
     }
 }
