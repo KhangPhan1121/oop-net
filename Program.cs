@@ -1,88 +1,79 @@
 ﻿using System;
 
-// lớp (Class) Person
-public class Person
-{
-    // Thuộc tính (Property) Name
-    public string Name { get; set; }
+namespace netdemo;
 
-    // Phương thức (Method) SayHello
-    public void Hello()
+interface IRun //Giao diện (Interface)
+{
+    public void Run();
+} 
+
+abstract class Animal //Lớp trừu tượng (Abstract Class)
+{
+    public string name { get; set; }
+
+    public abstract void Bark();
+}
+class Dog : Animal, IRun //Kế thừa (Inheritance)
+{
+    public int Type { get; set; }
+
+    public override void Bark()
     {
-        Console.WriteLine("Hello, my name is " + Name);
+        Console.WriteLine("gau");
+    }
+
+    public void Run()
+    {
+        Console.WriteLine("runz");
     }
 }
-
-
-
-// lớp Kế thừa
-// Lớp cơ sở (lớp cha)
-class Animal
+class Cat : Animal, IRun //Trừu tượng (Abstraction)
 {
-    public string Name { get; set; }
+    public int Type { get; set; }
 
-    public void Eat()
+    public override void Bark()
     {
-        Console.WriteLine(Name + " is eating.");
+        Console.WriteLine("Meow");
+    }
+
+    public void Run()
+    {
+        Console.Write("run");
     }
 }
-
-// Lớp dẫn xuất (lớp con) kế thừa từ lớp cơ sở
-class Dog : Animal
+class Program //Đa hình (Polymorphism)
 {
-    public void Bark()
+    static Animal GetAnimal(int abc)
     {
-        Console.WriteLine(Name + " is barking.");
+        if (abc > 10)
+        {
+            return new Cat();
+        }
+        else
+        {
+            return new Dog();
+        }
+        QLCB quanLyCanBo = new QLCB();
+            CanBo congnhan = new CongNhan("Pham Nhat Hoang", 20, "Nam", "HCM", 5);
+            CanBo kysu = new KySu("Le Tan Dat", 21, "Nam", "LongAn","Khoa CNTT" );
+            CanBo nhanvien = new NhanVien("Ho Hoang Khang", 22,"Nam", "TraVinh", "Quan Ly Nhan Vien");
+
+            quanLyCanBo.ThemMoiCanBo(congnhan);
+            quanLyCanBo.ThemMoiCanBo(kysu);
+            quanLyCanBo.ThemMoiCanBo(nhanvien);
+
+            Console.WriteLine("Danh sách cán bộ:");
+            quanLyCanBo.HienThiDanhSachCanBo();
+
+            Console.WriteLine("Thoát chương trình.");
+            quanLyCanBo.ThoatChươngTrinh();
     }
-}
-class Program
-{
-    static void Main()
+    static void Main(string[] args)
     {
-        
-        Dog dog = new Dog();
-        dog.Name = "Buddy";
-        dog.Eat();
-        dog.Bark();
+        int a = 1;
+        Animal b = GetAnimal(2);
+        b.Bark();
 
-        Person person = new Person();
 
-        // Gán giá trị cho thuộc tính Name của đối tượng
-        person.Name = "Khang";
-
-        // Gọi phương thức SayHello của đối tượng
-        person.Hello();
-        //Đa hình
-        Vehicle vehicle1 = new Car("Toyota");
-        vehicle1.Start();
-    }
-}
-
-// Lớp cơ sở (lớp cha)
-class Vehicle
-{
-    public string Name { get; set; }
-
-    public Vehicle(string name)
-    {
-        Name = name;
-    }
-
-    public virtual void Start()
-    {
-        Console.WriteLine(Name + " is starting.");
-    }
-}
-
-// Lớp dẫn xuất (lớp con) ô tô "Đa hình (Polymorphism)"
-class Car : Vehicle
-{
-    public Car(string name) : base(name)
-    {
-    }
-
-    public override void Start()
-    {
-        Console.WriteLine(Name + " is starting with a key!");
     }
 }

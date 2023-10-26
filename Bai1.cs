@@ -86,24 +86,4 @@ namespace netdemo
             Environment.Exit(0);
         }
     }
-    class Program
-    {
-        static void Main ()
-        {
-            QLCB quanLyCanBo = new QLCB();
-            CanBo congnhan = new CongNhan("Pham Nhat Hoang", 20, "Nam", "HCM", 5);
-            CanBo kysu = new KySu("Le Tan Dat", 21, "Nam", "LongAn","Khoa CNTT" );
-            CanBo nhanvien = new NhanVien("Ho Hoang Khang", 22,"Nam", "TraVinh", "Quan Ly Nhan Vien");
-
-            quanLyCanBo.ThemMoiCanBo(congnhan);
-            quanLyCanBo.ThemMoiCanBo(kysu);
-            quanLyCanBo.ThemMoiCanBo(nhanvien);
-
-            Console.WriteLine("Danh sách cán bộ:");
-            quanLyCanBo.HienThiDanhSachCanBo();
-
-            Console.WriteLine("Thoát chương trình.");
-            quanLyCanBo.ThoatChươngTrinh();
-        }
-    }
 }
