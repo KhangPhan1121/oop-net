@@ -66,12 +66,44 @@ namespace netdemo
             Console.WriteLine("Danh sách cán bộ: ");
             foreach (var canBo in danhsachCanBo)
             {
+                Console.WriteLine($"Họ tên: {canBo.HoTen}, Tuổi: {canBo.Tuoi}, Giới tính: {canBo.GioiTinh}, địa chỉ: {canBo.DiaChi}");
                 if (canBo is CongNhan)
                 {
-                    var CongNhan = canBo as CongNhan;
-                    Console.WriteLine();
+                    Console.WriteLine($"Bậc: {(canBo as CongNhan).Bac}");
+                }
+                else if (canBo is KySu)
+                {
+                    Console.WriteLine($"Ngành đào tạo: {(canBo as KySu).NganhDaoTao}");
+                }
+                else if (canBo is NhanVien)
+                {
+                    Console.WriteLine($"Công việc: {(canBo as NhanVien).CongViec}");
                 }
             }
+        }
+        public void ThoatChươngTrinh()
+        {
+            Environment.Exit(0);
+        }
+    }
+    class Program
+    {
+        static void Main ()
+        {
+            QLCB quanLyCanBo = new QLCB();
+            CanBo congnhan = new CongNhan("Pham Nhat Hoang", 20, "Nam", "HCM", 5);
+            CanBo kysu = new KySu("Le Tan Dat", 21, "Nam", "LongAn","Khoa CNTT" );
+            CanBo nhanvien = new NhanVien("Ho Hoang Khang", 22,"Nam", "TraVinh", "Quan Ly Nhan Vien");
+
+            quanLyCanBo.ThemMoiCanBo(congnhan);
+            quanLyCanBo.ThemMoiCanBo(kysu);
+            quanLyCanBo.ThemMoiCanBo(nhanvien);
+
+            Console.WriteLine("Danh sách cán bộ:");
+            quanLyCanBo.HienThiDanhSachCanBo();
+
+            Console.WriteLine("Thoát chương trình.");
+            quanLyCanBo.ThoatChươngTrinh();
         }
     }
 }
